@@ -9,3 +9,13 @@ services:
     env_file:
       - .env
     restart: unless-stopped
+    labels:
+      - traefik.enable=true
+    
+      # Routers (you already have these; just add the ".service" lines)
+      - traefik.http.routers.http-0-howk80c40osk8cooo0g8kg8g-linkding.service=linkding
+      - traefik.http.routers.https-0-howk80c40osk8cooo0g8kg8g-linkding.service=linkding
+    
+      # Service: tell Traefik which internal port to hit
+      - traefik.http.services.linkding.loadbalancer.server.port=9090
+    
